@@ -1,22 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "../axios";
 
-const EditNote = ({ note, onUpdate }) => {
-  const [title, setTitle] = useState(note.title);
-  const [body, setBody] = useState(note.body);
-  const [author, setAuthor] = useState(note.author);
+const EditNote = ({ note, onUpdate, onCancel }) => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [author, setAuthor] = useState("");
+  const [showPopUp, setShowPopUp] = useState(false);
+
+  useEffect(() => {
+    if (note) {
+      setTitle(note.title);
+      setBody(note.body);
+      setAuthor(note.author);
+      setShowPopUp(true);
+    }
+  }, [note]);
 
   const handleUpdate = async () => {
     try {
       const updatedNote = { ...note, title, body, author };
       await axios.put(`/${note.id}`, updatedNote);
       onUpdate(updatedNote);
+      setShowPopUp(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  return (
+  const handleClose = () => {
+    setShowPopUp(false);
+    onCancel();
+  };
+
+  return showPopUp ? (
     <div className="popup">
       <div className="popup__content">
         <h2>Edit Note</h2>
@@ -44,10 +60,13 @@ const EditNote = ({ note, onUpdate }) => {
           <button type="button" onClick={handleUpdate}>
             Update Note
           </button>
+          <button type="button" onClick={handleClose}>
+            Cancel
+          </button>
         </form>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default EditNote;

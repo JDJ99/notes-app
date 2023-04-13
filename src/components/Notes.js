@@ -11,15 +11,17 @@ const Notes = () => {
         const response = await axios.get(
           'https://docent.cmi.hro.nl/bootb/demo/notes/'
         );
-        setNotes(response.data);
+        const notesArray = Object.values(response.data.items);
+        setNotes(notesArray);
       } catch (error) {
         console.error(error);
       }
     };
     fetchNotes();
   }, []);
+  
 
-  console.log(notes); // add this line to check the value of notes
+  console.log(notes); 
 
   const handleDelete = async (id) => {
     try {
@@ -39,9 +41,11 @@ const Notes = () => {
       <h2>Notes</h2>
       {Array.isArray(notes) && notes.map((note) => (
         <div key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.title}</Link>
-          <button onClick={() => handleDelete(note.id)}>Delete</button>
-          <Link to={`/notes/${note.id}/edit`}>Edit</Link>
+            <p></p>
+            <Link to={`/notes/${note.id}`}>{note.title}</Link>
+            <p></p>
+            <Link to={`/notes/${note.id}/edit`}>Edit</Link>
+            <button onClick={() => handleDelete(note.id)}>Delete</button>
         </div>
       ))}
     </div>

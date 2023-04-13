@@ -30,7 +30,9 @@ const NoteDetail = () => {
       <h2>Note Detail</h2>
       <p>Title: {note.title}</p>
       <p>Body: {note.body}</p>
-      <p>API URI: {note.url}</p>
+      <p>
+        API URI: <a href={note._links?.self?.href}>{note._links?.self?.href}</a>
+      </p>
       <br />
       <button onClick={handleEdit}>Edit</button>
       <br />

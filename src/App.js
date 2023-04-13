@@ -1,10 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import Home from './components/Home';
-import Notes from './components/Notes';
-import NoteDetail from './components/NoteDetail';
-import CreateNote from './components/CreateNote';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./App.css";
+import Home from "./components/Home";
+import Notes from "./components/Notes";
+import NoteDetail from "./components/NoteDetail";
+import CreateNote from "./components/CreateNote";
+import EditNote from "./components/EditNote"; 
 
 function App() {
   return (
@@ -13,8 +14,12 @@ function App() {
         <h1>Notes</h1>
         <nav>
           <ul>
-            <li><Link to="/create">Create New Note</Link></li>
-            <li><Link to="/notes">Show Notes</Link></li>
+            <li>
+              <Link to="/create">Create New Note</Link>
+            </li>
+            <li>
+              <Link to="/notes">Show Notes</Link>
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -22,6 +27,7 @@ function App() {
           <Route path="/notes" element={<Notes />} />
           <Route path="/notes/:id" element={<NoteDetail />} />
           <Route path="/create" element={<CreateNote />} />
+          <Route path="/notes/:id/edit" element={<EditNote />} />
         </Routes>
       </div>
     </Router>
@@ -29,4 +35,3 @@ function App() {
 }
 
 export default App;
-
