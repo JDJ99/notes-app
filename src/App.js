@@ -1,11 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import "./App.css";
-import Home from "./components/Home";
-import Notes from "./components/Notes";
-import NoteDetail from "./components/NoteDetail";
-import CreateNote from "./components/CreateNote";
-import EditNote from "./components/EditNote"; 
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import './App.css';
+import Home from './components/Home';
+import Notes from './components/Notes';
+import NoteDetail from './components/NoteDetail';
+import CreateNote from './components/CreateNote';
+import EditNote from './components/EditNote';
+import axios from 'axios';
 
 function App() {
   return (
@@ -14,12 +15,12 @@ function App() {
         <h1>Notes</h1>
         <nav>
           <ul>
-            <li>
+            <p>
               <Link to="/create">Create New Note</Link>
-            </li>
-            <li>
+            </p>
+            <p>
               <Link to="/notes">Show Notes</Link>
-            </li>
+            </p>
           </ul>
         </nav>
         <Routes>
